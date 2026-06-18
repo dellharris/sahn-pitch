@@ -29,6 +29,30 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* IDU HOUSE BADGE */
+    .idu-badge {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 100;
+      display: block;
+      width: 72px;
+      opacity: 0.85;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .idu-badge:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .idu-badge img {
+      width: 100%;
+      display: block;
+      mix-blend-mode: luminosity;
+      filter: brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(0.85);
+    }
+
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
@@ -631,6 +655,11 @@
   </style>
 </head>
 <body>
+
+  <!-- IDU HOUSE LOGO -->
+  <a href="https://iduhouse.com/" target="_blank" class="idu-badge">
+    <img src="idu-house.png" alt="IDU House" />
+  </a>
 
   <!-- HERO -->
   <div class="hero">
