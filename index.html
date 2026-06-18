@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahn — Bay Area Soul</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --dark: #0A0A0A;
+      --surface: #111111;
+      --text: #F0EDE8;
+      --text-muted: #777770;
+      --green: #4ade80;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(10,10,10,0.05) 0%,
+        rgba(10,10,10,0.0) 25%,
+        rgba(10,10,10,0.45) 55%,
+        rgba(10,10,10,0.94) 82%,
+        #0A0A0A 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 960px;
+      padding: 0 52px 68px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(88px, 15vw, 168px);
+      line-height: 0.86;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      margin-bottom: 22px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(15px, 1.8vw, 19px);
+      color: rgba(240,237,232,0.6);
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tag {
+      border: 1px solid rgba(201,168,76,0.3);
+      color: rgba(232,201,122,0.8);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ── SHARED ── */
+    .label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.12), transparent);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ── STORY ── */
+    .story {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .story-left .label { margin-bottom: 40px; }
+
+    .story-pull {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.2;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .story-pull em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .story-right {
+      padding-top: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .story-right p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .story-right p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── REEL ── */
+    .reel-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 52px;
+    }
+
+    .reel-section .label { margin-bottom: 36px; }
+
+    .reel-inner {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    .reel-embed {
+      flex: 0 0 380px;
+    }
+
+    .reel-aside {
+      flex: 1;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .reel-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      line-height: 1.2;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .reel-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .reel-link {
+      font-size: 12px;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .reel-link:hover { color: var(--gold-light); }
+    .reel-link::after { content: '→'; }
+
+    /* ── STATS ── */
+    .stats-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 52px 100px;
+      overflow: hidden;
+    }
+
+    .stats-section .label { margin-bottom: 64px; }
+
+    .stat-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+    }
+
+    .stat-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.04); }
+
+    .stat-row.right {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(72px, 10vw, 120px);
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+    }
+
+    .stat-row.accent .stat-num { color: var(--gold-light); }
+
+    .stat-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 8px;
+    }
+
+    .stat-row.right .stat-info { align-items: flex-end; }
+
+    .stat-what {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .stat-platform-name {
+      font-size: 11px;
+      color: rgba(136,136,128,0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .stat-growth {
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-context {
+      position: absolute;
+      right: 0;
+      bottom: 24px;
+      font-size: 11px;
+      color: rgba(136,136,128,0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stat-row.right .stat-context {
+      left: 0;
+      right: auto;
+    }
+
+    /* ── TRACK ── */
+    .track-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 52px;
+    }
+
+    .track-section .label { margin-bottom: 36px; }
+
+    .track-feature {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+      padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .track-left {}
+
+    .track-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .track-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 0.95;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .track-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 480px;
+      font-weight: 300;
+    }
+
+    .listen-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #0A0A0A;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      gap: 8px;
+      flex-shrink: 0;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .listen-btn:hover {
+      background: var(--gold-light);
+      transform: scale(1.06);
+    }
+
+    /* ── SOCIAL ── */
+    .social-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 52px;
+    }
+
+    .social-section .label { margin-bottom: 44px; }
+
+    .social-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-decoration: none;
+      color: var(--text);
+      transition: padding-left 0.2s;
+      group: true;
+    }
+
+    .social-row:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+    .social-row:hover { padding-left: 8px; }
+
+    .social-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .social-platform-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      min-width: 80px;
+    }
+
+    .social-handle-text {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .social-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .social-count-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .social-arrow {
+      font-size: 18px;
+      color: rgba(201,168,76,0.4);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .social-row:hover .social-arrow {
+      color: var(--gold);
+      transform: translateX(4px);
+    }
+
+    /* ── MANIFESTO ── */
+    .manifesto {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 52px 120px;
+    }
+
+    .manifesto .label { margin-bottom: 64px; }
+
+    .manifesto-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .m-line {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .m-line:first-child { border-top: 1px solid rgba(255,255,255,0.04); }
+
+    .m-num {
+      font-size: 10px;
+      color: rgba(201,168,76,0.3);
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      min-width: 28px;
+      flex-shrink: 0;
+      padding-top: 4px;
+    }
+
+    .m-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.25;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .m-text.muted {
+      color: var(--text-muted);
+      font-size: clamp(16px, 2vw, 22px);
+    }
+
+    .m-text.gold { color: var(--gold-light); }
+
+    .manifesto-credit {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .manifesto-credit-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .manifesto-credit-role {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 52px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 960px;
+      margin: 0 auto;
+      font-size: 11px;
+      color: rgba(136,136,128,0.35);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      .hero-content, .story, .reel-section, .stats-section,
+      .track-section, .social-section, .manifesto, footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .story { grid-template-columns: 1fr; gap: 32px; padding-top: 64px; padding-bottom: 64px; }
+      .story-right { padding-top: 0; }
+      .reel-inner { flex-direction: column; }
+      .reel-embed { flex: none; width: 100%; }
+      .track-feature { grid-template-columns: 1fr; gap: 32px; }
+      .listen-btn { width: 80px; height: 80px; }
+      .stat-num { font-size: clamp(56px, 18vw, 80px); }
+      .m-text { font-size: clamp(18px, 5vw, 26px); }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-photo">
+      <img src="sahn-hero.png" alt="Sahn" />
+    </div>
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Bay Area Soul &nbsp;·&nbsp; Vallejo, CA</div>
+      <h1 class="hero-name">Sahn</h1>
+      <p class="hero-tagline">The voice the Bay has been waiting for.</p>
+      <div class="hero-tags">
+        <span class="tag">Soul</span>
+        <span class="tag">R&amp;B</span>
+        <span class="tag">Bay Area</span>
+        <span class="tag">Vallejo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div class="story">
+    <div class="story-left">
+      <div class="label">The Artist</div>
+      <p class="story-pull">
+        Rooted in Vallejo.<br>
+        Carrying the soul<br>
+        of the entire <em>Bay.</em>
+      </p>
+    </div>
+    <div class="story-right">
+      <p>
+        Sahn is a Bay Area soul artist whose sound is undeniably rooted — in the churches, the neighborhoods, the people of Vallejo and the broader Bay. Her voice carries the weight of classic soul with a distinctly West Coast pulse.
+      </p>
+      <p>
+        She's not chasing a lane. <strong>She is the lane.</strong>
+      </p>
+      <p>
+        Rising in critical acclaim and building an audience that responds to authenticity over algorithms — Sahn represents exactly what soul music needs right now: a real voice with something real to say.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- REEL -->
+  <div class="reel-section">
+    <div class="label">Watch</div>
+    <div class="reel-inner">
+      <div class="reel-embed">
+        <iframe
+          src="https://www.instagram.com/reel/DZTxPOXpS64/embed/"
+          width="380"
+          height="620"
+          frameborder="0"
+          scrolling="no"
+          allowtransparency="true"
+          allow="encrypted-media"
+          style="border-radius:12px;width:100%;max-width:380px;display:block;border:none;">
+        </iframe>
+      </div>
+      <div class="reel-aside">
+        <p class="reel-headline">
+          This is what it sounds like when the Bay produces something real.
+        </p>
+        <p class="reel-sub">
+          No co-sign needed. No industry push. Just Sahn — and an audience that found her because the music demanded to be heard.
+        </p>
+        <a class="reel-link" href="https://www.instagram.com/callmesahn/" target="_blank">Follow @callmesahn</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STATS -->
+  <div class="stats-section">
+    <div class="label">Traction</div>
+
+    <div class="stat-row accent">
+      <div class="stat-num">41.7K</div>
+      <div class="stat-info">
+        <span class="stat-what">Followers</span>
+        <span class="stat-platform-name">Instagram</span>
+        <span class="stat-growth">↑ 19.6% in 28 days</span>
+      </div>
+      <span class="stat-context">+ 6,840 new fans</span>
+    </div>
+
+    <div class="stat-row right">
+      <div class="stat-num">28.7K</div>
+      <div class="stat-info">
+        <span class="stat-what">Followers</span>
+        <span class="stat-platform-name">TikTok</span>
+      </div>
+    </div>
+
+    <div class="stat-row accent">
+      <div class="stat-num">72.9K</div>
+      <div class="stat-info">
+        <span class="stat-what">Total Fans</span>
+        <span class="stat-platform-name">All Platforms</span>
+        <span class="stat-growth">↑ 11.2% in 28 days</span>
+      </div>
+      <span class="stat-context">Organic. No ads.</span>
+    </div>
+
+    <div class="stat-row right">
+      <div class="stat-num">2.12K</div>
+      <div class="stat-info">
+        <span class="stat-what">Followers</span>
+        <span class="stat-platform-name">Spotify</span>
+        <span class="stat-growth">↑ 19.2% in 28 days</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TRACK -->
+  <div class="track-section">
+    <div class="label">Featured Track</div>
+    <div class="track-feature">
+      <div class="track-left">
+        <div class="track-badge">First Listen · Unreleased</div>
+        <div class="track-name">Locked In</div>
+        <p class="track-desc">Undiluted Bay Area soul. This is the record — the one that makes the case without having to make the case.</p>
+      </div>
+      <a href="https://untitled.stream/library/project/WLZwtXjLYd7f9ZtF9Ok3y" target="_blank" class="listen-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Play
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SOCIAL -->
+  <div class="social-section">
+    <div class="label">Find Her</div>
+    <div class="social-strip">
+
+      <a class="social-row" href="https://www.instagram.com/callmesahn/" target="_blank">
+        <div class="social-left">
+          <span class="social-platform-label">Instagram</span>
+          <span class="social-handle-text">@callmesahn</span>
+        </div>
+        <div class="social-right">
+          <span class="social-count-text">41.7K &nbsp;<span style="color:var(--green)">+19.6%</span></span>
+          <span class="social-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="social-row" href="https://www.tiktok.com/@callmesahn" target="_blank">
+        <div class="social-left">
+          <span class="social-platform-label">TikTok</span>
+          <span class="social-handle-text">@callmesahn</span>
+        </div>
+        <div class="social-right">
+          <span class="social-count-text">28.7K followers</span>
+          <span class="social-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="social-row" href="https://open.spotify.com/search/Sahn" target="_blank">
+        <div class="social-left">
+          <span class="social-platform-label">Spotify</span>
+          <span class="social-handle-text">Sahn</span>
+        </div>
+        <div class="social-right">
+          <span class="social-count-text">2.12K &nbsp;<span style="color:var(--green)">+19.2%</span></span>
+          <span class="social-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="social-row" href="https://linktr.ee/callmesahn" target="_blank">
+        <div class="social-left">
+          <span class="social-platform-label">All Links</span>
+          <span class="social-handle-text">linktr.ee/callmesahn</span>
+        </div>
+        <div class="social-right">
+          <span class="social-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto">
+    <div class="label">Why Now</div>
+    <div class="manifesto-lines">
+
+      <div class="m-line">
+        <span class="m-num">01</span>
+        <span class="m-text">The Bay has always produced soul.</span>
+      </div>
+
+      <div class="m-line">
+        <span class="m-num">02</span>
+        <span class="m-text">Sahn is what it sounds like right now.</span>
+      </div>
+
+      <div class="m-line">
+        <span class="m-num">03</span>
+        <span class="m-text muted">Nearly 20% Instagram growth in 28 days — no ads, no push. Just the music moving people.</span>
+      </div>
+
+      <div class="m-line">
+        <span class="m-num">04</span>
+        <span class="m-text">"Locked In" is the record.</span>
+      </div>
+
+      <div class="m-line">
+        <span class="m-num">05</span>
+        <span class="m-text gold">Apple Music should be first.</span>
+      </div>
+
+    </div>
+
+    <div class="manifesto-credit">
+      <div>
+        <div class="manifesto-credit-name">Dell Harris</div>
+        <div class="manifesto-credit-role">Presented by</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Sahn &nbsp;·&nbsp; Bay Area Soul</span>
+    <span>Vallejo, CA &nbsp;·&nbsp; 2026</span>
+  </footer>
+
+</body>
+</html>
