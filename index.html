@@ -556,6 +556,68 @@
       text-transform: uppercase;
     }
 
+    /* REEL CARD */
+    .reel-card {
+      display: block;
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 9/16;
+      background: linear-gradient(145deg, #1a1208 0%, #0f0c06 50%, #0a0a0a 100%);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 16px;
+      text-decoration: none;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .reel-card:hover {
+      border-color: rgba(201,168,76,0.6);
+      transform: scale(1.01);
+    }
+
+    .reel-card-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    }
+
+    .reel-play-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #0A0A0A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .reel-card:hover .reel-play-icon {
+      background: var(--gold-light);
+      transform: scale(1.08);
+    }
+
+    .reel-card-label {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .reel-card-handle {
+      font-size: 15px;
+      color: rgba(240,237,232,0.5);
+      font-weight: 300;
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 700px) {
       .hero-content, .story, .reel-section, .stats-section,
@@ -626,16 +688,15 @@
     <div class="label">Watch</div>
     <div class="reel-inner">
       <div class="reel-embed">
-        <iframe
-          src="https://www.instagram.com/reel/DZTxPOXpS64/embed/"
-          width="380"
-          height="620"
-          frameborder="0"
-          scrolling="no"
-          allowtransparency="true"
-          allow="encrypted-media"
-          style="border-radius:12px;width:100%;max-width:380px;display:block;border:none;">
-        </iframe>
+        <a href="https://www.instagram.com/reel/DZTxPOXpS64/" target="_blank" class="reel-card">
+          <div class="reel-card-inner">
+            <div class="reel-play-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="reel-card-label">Watch Reel</div>
+            <div class="reel-card-handle">@callmesahn</div>
+          </div>
+        </a>
       </div>
       <div class="reel-aside">
         <p class="reel-headline">
