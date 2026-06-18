@@ -562,7 +562,7 @@
       width: 100%;
       max-width: 380px;
       aspect-ratio: 9/16;
-      background: linear-gradient(145deg, #1a1208 0%, #0f0c06 50%, #0a0a0a 100%);
+      background: #0a0a0a;
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 16px;
       text-decoration: none;
@@ -571,41 +571,34 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .reel-card:hover {
-      border-color: rgba(201,168,76,0.6);
-      transform: scale(1.01);
-    }
+    .reel-card:hover { border-color: rgba(201,168,76,0.6); }
 
-    .reel-card-inner {
+    .reel-video {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .reel-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(10,10,10,0.85) 100%);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+      justify-content: flex-end;
+      padding: 24px;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.25s;
     }
 
-    .reel-play-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--gold);
-      color: #0A0A0A;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .reel-card:hover .reel-play-icon {
-      background: var(--gold-light);
-      transform: scale(1.08);
-    }
+    .reel-card:hover .reel-card-overlay { opacity: 1; }
 
     .reel-card-label {
-      font-size: 13px;
+      font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
@@ -613,9 +606,9 @@
     }
 
     .reel-card-handle {
-      font-size: 15px;
-      color: rgba(240,237,232,0.5);
-      font-weight: 300;
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 400;
     }
 
     /* ── MOBILE ── */
@@ -689,12 +682,17 @@
     <div class="reel-inner">
       <div class="reel-embed">
         <a href="https://www.instagram.com/reel/DZTxPOXpS64/" target="_blank" class="reel-card">
-          <div class="reel-card-inner">
-            <div class="reel-play-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="reel-card-label">Watch Reel</div>
-            <div class="reel-card-handle">@callmesahn</div>
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            class="reel-video">
+            <source src="sahn-reel.mov" type="video/mp4" />
+          </video>
+          <div class="reel-card-overlay">
+            <div class="reel-card-label">Watch on Instagram</div>
+            <div class="reel-card-handle">@callmesahn →</div>
           </div>
         </a>
       </div>
